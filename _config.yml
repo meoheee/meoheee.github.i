@@ -38,7 +38,7 @@ social:
   email: meohee@jnu.ac.kr # change to your email address
   links:
     # The first element serves as the copyright owner's link
-    - https://instagram.com/meoheee # change to your twitter homepage
+    #- https://instagram.com/meoheee # change to your twitter homepage
     - https://github.com/meoheee # change to your github homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
