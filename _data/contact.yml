@@ -13,11 +13,11 @@
 
 - type: youtube
   icon: "fa-brands fa-youtube"
-  url: "https://www.youtube.com/@meoheee"
+  url: 'https://www.youtube.com/@meoheee'
 
 - type: linkedin
   icon: "fa-brands fa-linkedin"
-  url: "www.linkedin.com/in/meoheee"
+  url: 'www.linkedin.com/in/meoheee'
 # Uncomment and complete the url below to enable more contact options
 #
 # - type: mastodon
