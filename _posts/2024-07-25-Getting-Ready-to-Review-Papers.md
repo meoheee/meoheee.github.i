@@ -1,6 +1,5 @@
 ---
 title: Getting Ready to Review Papers
-date: YYYY-MM-DD HH:MM:SS +/-TTTT
 categories:
   - Introduction
 tags:
