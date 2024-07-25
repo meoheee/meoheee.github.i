@@ -1,4 +1,11 @@
-
+---
+title: Getting Ready to Review Papers
+date: YYYY-MM-DD HH:MM:SS +/-TTTT
+categories:
+  - Introduction
+tags:
+  - Introduction
+---
 ## Getting Ready to Review Papers
 
 I plan to read and post reviews of papers.
