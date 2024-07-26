@@ -8,23 +8,23 @@ tags:
 
 I plan to read and post reviews of papers.  
 This is because ​**my professor assigned me to read 20 papers** by the end of August 
-  
+ 
 논문 리뷰 올린다. 교수님이 20편 읽으라고 하신다   
-  
-    
+ 
+ 
 But, I thought it would be a shame to keep them just to myself...  
 I never expected my blog challenge would turn into a paper reading  
-  
+ 
 살려주세요  
-  
-  
+ 
+ 
 So, I have a few rules for reading:  
 1) No using ChatGPT  
 2) No using translation tools  
-  
+
 미친 미친 규칙!!  
-  
-  
+
+
 어우  
   
   
