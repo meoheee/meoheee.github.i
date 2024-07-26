@@ -5,13 +5,14 @@ categories:
 tags:
   - Introduction
 ---
-
+엔터 규칙을 모르겠다 이말이야
+<br>
+<br>
 I plan to read and post reviews of papers  
 This is because ​**my professor assigned me to read 20 papers** by the end of August
 
 논문 리뷰 올린다. 교수님이 20편 읽으라고 하신다
 
- 
 
 But, I thought it would be a shame to keep them just to myself...  
 I never expected my blog challenge would turn into a paper reading

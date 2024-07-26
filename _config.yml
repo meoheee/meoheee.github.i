@@ -217,6 +217,9 @@ exclude:
   - "*.config.js"
   - package*.json
 
+custom_css:
+  - /assets/css/custom.css
+
 jekyll-archives:
   enabled: [categories, tags]
   layouts:
