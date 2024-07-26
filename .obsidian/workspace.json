@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/2024-07-26-Paper Review-ASPLOS'21_Dagger.md",
+                "file": "_posts/2024-07-25-Getting-Ready-to-Review-Papers.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/2024-07-26-Paper Review-ASPLOS'21_Dagger.md",
+                "file": "_posts/2024-07-25-Getting-Ready-to-Review-Papers.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/2024-07-26-Paper Review-ASPLOS'21_Dagger.md",
+                "file": "_posts/2024-07-25-Getting-Ready-to-Review-Papers.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/2024-07-26-Paper Review-ASPLOS'21_Dagger.md"
+                "file": "_posts/2024-07-25-Getting-Ready-to-Review-Papers.md"
               }
             }
           }
@@ -148,6 +148,7 @@
   },
   "active": "d1d310946a63c4f9",
   "lastOpenFiles": [
+    "_posts/2024-07-26-Paper Review-ASPLOS'21_Dagger.md",
     "_posts/2024-07-25-Getting-Ready-to-Review-Papers.md",
     "_plugins/line_breaks_filter.rb",
     "_site/assets/css/custom.css",
@@ -168,7 +169,6 @@
     "_site/assets/lib/fontawesome-free/README.md",
     "_site/assets/img/profile.png",
     "_site/assets/lib/README.md",
-    "_posts/2024-07-26-Paper Review-ASPLOS'21_Dagger.md",
     "_tabs/about.md",
     "_tabs/archives.md",
     "_tabs/about Daehee.md",
