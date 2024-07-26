@@ -7,11 +7,11 @@ tags:
 ---
 
 I plan to read and post reviews of papers.  
-This is because ​**my professor assigned me to read 20 papers** by the end of August  
+This is because ​**my professor assigned me to read 20 papers** by the end of August 
   
 논문 리뷰 올린다. 교수님이 20편 읽으라고 하신다   
   
-  
+    
 But, I thought it would be a shame to keep them just to myself...  
 I never expected my blog challenge would turn into a paper reading  
   
@@ -52,22 +52,22 @@ I will describe in detail the key parts of something developed or discovered in 
 I will discuss the strengths related to the paper's writing style or structure  
 
 글 얼마나 잘썼는지 보게요  
-
-​
+  
+​  
 - Weakness  
 
-This is the opposite of the strengths section.  
+This is the opposite of the strengths section  
 
-논문의 약점 분석\
-
-
+논문의 약점 분석  
+   
+   
 - Review  
 
 I will share my overall thoughts on the paper  
 
 전체적인 내 생각   
-
-
+  
+  
 - Improving  
 
 I will think about how this paper can be used as a reference to generate new ideas  
