@@ -11,22 +11,16 @@ This is because ​**my professor assigned me to read 20 papers** by the end of 
  
 논문 리뷰 올린다. 교수님이 20편 읽으라고 하신다   
  
- 
 But, I thought it would be a shame to keep them just to myself...  
 I never expected my blog challenge would turn into a paper reading  
  
 살려주세요  
- 
  
 So, I have a few rules for reading:  
 1) No using ChatGPT  
 2) No using translation tools  
 
 미친 미친 규칙!!  
-
-
-어우  
-  
   
 There will be a few rules for the paper review posts I will be uploading  
   
@@ -39,34 +33,29 @@ I will post an overall summary of the paper
 
 논문 전체 요약 ㄱㄱ  
 
-​
 - Architecture  
 
 I will describe in detail the key parts of something developed or discovered in the paper  
 
 대충 논문 중요한 거 찝어서 쓸거임  
 
-​
 - Strength  
 
 I will discuss the strengths related to the paper's writing style or structure  
 
 글 얼마나 잘썼는지 보게요  
   
-​  
 - Weakness  
 
 This is the opposite of the strengths section  
 
 논문의 약점 분석  
    
-   
 - Review  
 
 I will share my overall thoughts on the paper  
 
 전체적인 내 생각   
-  
   
 - Improving  
 
