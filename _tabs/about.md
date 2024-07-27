@@ -4,9 +4,11 @@ icon: fas fa-info-circle
 order: 4
 ---
 
-> Add Markdown syntax content to file `_tabs/about.md`{: .filepath } and it will show up on this page.
-{: .prompt-tip }
+# WELCOME to meohee's Archives
 
-# Introduction
+## 안녕하세요! 머히 입니다
 
-## Hi
+I am a graduate student at CNU doing my master's program in `SRC Lab`  
+<https://src-jnu.github.io/>
+
+얼른 곧 자기소개 준비 완료해볼게요!
