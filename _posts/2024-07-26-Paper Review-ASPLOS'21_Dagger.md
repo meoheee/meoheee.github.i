@@ -82,18 +82,53 @@ Dagger는 앞서 Problems에서 이야기 한 내용들을 해결할 가속기 �
 - Green Bitstream
 	- 사용자 로직 구현, Dagger NIC
 
-더 자세한 부분은 본문 4장을 확인해보세요!!
+더 자세한 부분은 본문 4.1장을 확인해보세요!!
 <br><br>
 
 ### API & Threading Model
 
-API는 클라우드 애플리케이션의 표준 클라이언트-서버 아키텍쳐를 따른다고 합니다. 그리고 자체 인터페이스 정의 언어(이하 IDL)와 코드 생성기를 가지고 있다고 합니다. Google Protobuf IDL을 채택했고, `Listing 1`은 인터페이스 정의 예시를 보여주고 있습니다.  
+API는 클라우드 애플리케이션의 표준 클라이언트-서버 아키텍쳐를 따른다고 합니다. 그리고 자체 인터페이스 정의 언어(이하 IDL)와 코드 생성기를 가지고 있다고 합니다. Google Protobuf IDL을 채택했고, `Listing 1`은 인터페이스 정의 예시를 보여주고 있습니다. 코드 생성기는 대상 IDL 파일을 파싱하고 하드웨어에 쓰기/읽기 중인 낮은 수준의 RPC 구조를 높은 수준의 서비스 API 함수 호출로 랩핑하는 클라이언트 및 서버 stubs를 생성한다고 합니다.  
 
-코드 생성기는 대상 IDL 파일을 파싱하고 하드웨어에 쓰기/읽기 중인 낮은 수준의 RPC 구조를 높은 수준의 서비스 API 함수 호출로 랩핑하는 클라이언트 및 서버 stubs를 생성한다고 합니다. 이 API에 두가지 중요한 클래스가 있는데요 
+Threading Model은 `figure 7`에 나와있는 것 처럼 RX/TX 링에 1대1로 매핑되도록 합니다. 각 flow 수는 CPU 코어 수에 따라 결정된다고 하네요. 그리고 스레드 간의 통신 오버헤드를 피하기 위해 dispatch 스레드에서 RPC 핸들러를 실행합니다.[^footnote] 그리고 *RpcClient*의 연결은 동일한 RX/TX 링을 공유하므로 Dagger는 Shared Receive Queue(이하 SRQ) 모델을 구현합니다.  
 
+Dagger는 Connection들을 모두 하드웨어에서 관리하니 `Figure 6`에 보이듯 Connection Manager(이하 CM) 모듈들이 포함되는데, Connection Table Interface가 연결 ID를 튜플에 매핑합니다. 아래는 연결 ID입니다.
+- `src_flow` : 클라이언트에서 요청을 수신하는 Flow ID 지정  
+- `dest_addr`, `load_balancer` : 호스트의 목적지 주소와 선호되는 load balancing scheme 정의  
+CM은 특정 메모리 조직을 가진 간단한 direct-mapped 캐시로 설계됐습니다. 
 <br><br>
 
+### NUMA Interconnects
+
+저자는 앞서 언급한대로 NIC과 호스트의 연결에 있어 PCIe는 비효율적이다 라고 강력하게 주장하고 있습니다. 주로 호스트 메모리에서 네트워크 패킷을 가져올 때가 문제라는데, 단순 예시로 보통 NIC은 DMA 전송을 사용하는데, 버퍼에서 Packet Descriptor와 Payload를 읽기 위해 MMIO Doorbell transaction에 의해 시작된 것입니다.[^fn-nth-2] 음...Doorbell이 뭔지는 저도 잘 모르겠네요..!?ㅠㅠ 저 각주 논문도 빠른 시일 내에 읽어보도록 할게요!  
+
+아무튼 요런 단순한 Doorbell Scheme은 앞서 문제라 했던 작은 요청이 대상일 경우 비효율적이라는 겁니다. MMIO 트랜잭션은 non-casheable writes로 구현돼서 느리고 비싸다고 하네요. 모든 MMIO 요청이 프로세서를 거치기 때문입니다.  
+
+아무튼 PCIe 프로토콜은 근본적으로 생산자-소비자 데이터 모델이 맞춰 설계되었으니 대규모 데이터 전송에서는 잘 작동하지만 RPC Request에서는 적절하지 않아요! 위에서 그 이유는 설명했듯 크기가 작거든요!  
+
+그런데 NUMA를 사용하게 되면 프로세서의 메모리 서브시스템에 I/O를 통합할 수 있어서 프로세서에게 데이터 업데이트 한다! 라고 말하지 않아도 된다고 합니다. 그럼 프로세서가 할 일이 NIC과 공유하는 버퍼에 RPC 요청/응답을 쓰는 것 밖에 없으니 효율성이 향상되죠.  
+
+결론은 PCIe 말고 NUMA 쓰자! 입니다!
 <br><br>
+### Implementation
+
+#### NIC Interface
+`Figure 8`은 NIC I/O 인터페이스를 보여줍니다. 위에서 보신듯이 Dagger는 NIC flow마다 RX/TX 버퍼를 제공하고 있고 있습니다.  
+
+#### RPC Pipeline
+
+
+#### Dagger Implementation
+- CPU : Intel Broadwell
+- FPGA : Arria 10 GX1150
+- Host CPU : Intel Xeon E5-2600v4
+- Hardware (Dagger NIC) -> SystemVerilog, OPAE HDK lib.
+- Software : C++11, GCC로 Compile
+- Dagger IDL : Python 3.7
+
+<br><br>
+#### Evaluation 파트는 생략입니다!
+<br>
+<br>
 ## Review
 ---
 
@@ -106,3 +141,8 @@ API는 클라우드 애플리케이션의 표준 클라이언트-서버 아키�
 <br><br>
 
 Thanks!!
+<br><br>
+
+
+[^footnote]: Aleksandar Dragojević, Dushyanth Narayanan, Miguel Castro, and Orion Hodson. 2014. FaRM: Fast Remote Memory. USENIX Symp. on Networked Systems Design and Implementation (NSDI) (2014).  
+[^fn-nth-2]: Anuj Kalia, Michael Kaminsky, and David G. Andersen. 2016. Design Guidelines for High Performance RDMA Systems. USENIX Annual Technical Conf. (ATC) (2016).

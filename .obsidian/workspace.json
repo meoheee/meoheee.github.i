@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/2024-07-27-Paper Review-USENIX'23_STYX.md",
+                "file": "_posts/2024-07-28-Paper Review-USENIX'20_sRDMA.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/2024-07-27-Paper Review-USENIX'23_STYX.md",
+                "file": "_posts/2024-07-28-Paper Review-USENIX'20_sRDMA.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/2024-07-27-Paper Review-USENIX'23_STYX.md",
+                "file": "_posts/2024-07-28-Paper Review-USENIX'20_sRDMA.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/2024-07-27-Paper Review-USENIX'23_STYX.md"
+                "file": "_posts/2024-07-28-Paper Review-USENIX'20_sRDMA.md"
               }
             }
           }
@@ -148,20 +148,22 @@
   },
   "active": "d1d310946a63c4f9",
   "lastOpenFiles": [
-    "_posts/2024-07-26-Paper Review-ASPLOS'21_Dagger.md",
+    "_posts/2024-07-25-Getting-Ready-to-Review-Papers.md",
+    "_posts/2024-07-28-Paper Review-USENIX'20_sRDMA.md",
     "_posts/2024-07-27-Paper Review-USENIX'23_STYX.md",
+    "_site/posts/Paper-Review-USENIX'20_sRDMA/index.html",
+    "_site/posts/Paper-Review-USENIX'20_sRDMA",
+    "_site/posts/Paper-Review-USENIX'20_STYX-1/index.html",
+    "_site/posts/Paper-Review-USENIX'20_STYX-1",
+    "_site/posts/Paper-Review-USENIX'23_STYX-1/index.html",
+    "_site/posts/Paper-Review-USENIX'23_STYX-1",
+    "_posts/2024-07-26-Paper Review-ASPLOS'21_Dagger.md",
+    "_posts/Untitled.md",
     "_tabs/about.md",
     "_site/about/index.html",
     "_site/about",
     "_site/meoheee/index.html",
     "_site/meoheee",
-    "_site/posts/Paper-Review-USENIX'23_STYX/index.html",
-    "_site/posts/Paper-Review-USENIX'23_STYX",
-    "_site/posts/Paper-Review-ASPLOS'21_/index.html",
-    "_site/posts/Paper-Review-ASPLOS'21_",
-    "_site/posts/Paper-Review-ASPLOS'21_Dagger-1/index.html",
-    "_site/posts/Paper-Review-ASPLOS'21_Dagger-1",
-    "_posts/2024-07-25-Getting-Ready-to-Review-Papers.md",
     "_site/assets/img/favicons/mstile-150x150.png",
     "_site/assets/img/favicons/favicon-32x32.png",
     "_site/assets/img/favicons/favicon-16x16.png",
