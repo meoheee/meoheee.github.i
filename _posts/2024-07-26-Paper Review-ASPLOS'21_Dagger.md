@@ -10,9 +10,6 @@ tags:
 <br>
 >Due to copyright issues, I do not include `Figures` that are embedded in the paper :(
 {: .prompt-warning }  
-
-> This article is being edited
-{: .prompt-danger }  
  
 ## Introduction
 ---
@@ -89,12 +86,12 @@ Dagger는 앞서 Problems에서 이야기 한 내용들을 해결할 가속기 �
 
 API는 클라우드 애플리케이션의 표준 클라이언트-서버 아키텍쳐를 따른다고 합니다. 그리고 자체 인터페이스 정의 언어(이하 IDL)와 코드 생성기를 가지고 있다고 합니다. Google Protobuf IDL을 채택했고, `Listing 1`은 인터페이스 정의 예시를 보여주고 있습니다. 코드 생성기는 대상 IDL 파일을 파싱하고 하드웨어에 쓰기/읽기 중인 낮은 수준의 RPC 구조를 높은 수준의 서비스 API 함수 호출로 랩핑하는 클라이언트 및 서버 stubs를 생성한다고 합니다.  
 
-Threading Model은 `figure 7`에 나와있는 것 처럼 RX/TX 링에 1대1로 매핑되도록 합니다. 각 flow 수는 CPU 코어 수에 따라 결정된다고 하네요. 그리고 스레드 간의 통신 오버헤드를 피하기 위해 dispatch 스레드에서 RPC 핸들러를 실행합니다.[^footnote] 그리고 *RpcClient*의 연결은 동일한 RX/TX 링을 공유하므로 Dagger는 Shared Receive Queue(이하 SRQ) 모델을 구현합니다.  
+Threading Model은 `figure 7`에 나와있는 것 처럼 RX/TX 링에 1대1로 매핑되도록 합니다. 각 flow 수는 CPU 코어 수에 따라 결정된다고 하네요. 그리고 스레드 간의 통신 오버헤드를 피하기 위해 dispatch 스레드에서 RPC 핸들러를 실행합니다.[^footnote] 그리고 *RpcClient*의 연결은 동일한 RX/TX 링을 공유하므로 Dagger는 Shared Receive Queue(이하 SRQ) 모델을 구현합니다.  다시 말하면 CPU 코어 수에 따라 Dagger가 확장된다라는 말인 것 같네요.
 
 Dagger는 Connection들을 모두 하드웨어에서 관리하니 `Figure 6`에 보이듯 Connection Manager(이하 CM) 모듈들이 포함되는데, Connection Table Interface가 연결 ID를 튜플에 매핑합니다. 아래는 연결 ID입니다.
 - `src_flow` : 클라이언트에서 요청을 수신하는 Flow ID 지정  
 - `dest_addr`, `load_balancer` : 호스트의 목적지 주소와 선호되는 load balancing scheme 정의  
-CM은 특정 메모리 조직을 가진 간단한 direct-mapped 캐시로 설계됐습니다. 
+CM은 특정 메모리 조직을 가진 간단한 direct-mapped 캐시로 설계됐습니다. 캐시 접근과 관련한 내용은 본문을 확인해주세요!!  
 <br><br>
 
 ### NUMA Interconnects
@@ -112,12 +109,14 @@ CM은 특정 메모리 조직을 가진 간단한 direct-mapped 캐시로 설계
 ### Implementation
 
 #### NIC Interface
-`Figure 8`은 NIC I/O 인터페이스를 보여줍니다. 위에서 보신듯이 Dagger는 NIC flow마다 RX/TX 버퍼를 제공하고 있고 있습니다.  
+`Figure 8`은 NIC I/O 인터페이스를 보여줍니다. 위에서 보신듯이 Dagger는 NIC flow마다 RX/TX 버퍼를 제공하고 있고 있습니다. 이건 당연히 오고가는 RPC를 위한 것이구요. RX의 경우 RPC 데이터를 가져오기 위해 PCIe DMA를 기반으로 한다고 합니다. TX는 `Figure 9`의 그림을 통해 나타냈으며, 들어오는 RPC를 FIFO 버퍼로 처리한다고 합니다. 그리고 로드밸런서와 flow 스케줄러가 포함되어 있습니다.
 
 #### RPC Pipeline
 
+CPU-NIC의 인터페이스 ->RPC 모듈 -> Transport Layer 입니다. `Figure 6`에도 명시했네요.
 
 #### Dagger Implementation
+
 - CPU : Intel Broadwell
 - FPGA : Arria 10 GX1150
 - Host CPU : Intel Xeon E5-2600v4
@@ -127,6 +126,8 @@ CM은 특정 메모리 조직을 가진 간단한 direct-mapped 캐시로 설계
 
 <br><br>
 #### Evaluation 파트는 생략입니다!
+
+그냥 다른 관련 연구들과의 비교일 뿐입니다. RPC 처리에 대해 더 빠르고 효율적이며 PCIe를 썼을 때보다 더 빠르다는 내용입니다. 딱 하나 봐야 할 내용이 있다면, 스레드 확장 시 7개까지 선형으로 좋아지지만 8개부터는 아니다라는 겁니다.
 <br>
 <br>
 ## Review
@@ -153,6 +154,18 @@ NIC을 통째로 재구현했다는 점에 저는 좀 놀랐어요..! 하드웨�
 ### Weakness
 
 1) 어느 논문이나 단점이 있듯, 작은 RPC 요청에 초점을 맞추다보니 반대로 큰 RPC 요청에 대해서는 캐시 라인 크기의 제한으로 인해 소프트웨어 상에서 재조립을 해줘야한다는 겁니다.  
+
+
+
+## Related Works
+
+1) Mohammad Alian and Nam Sung Kim. 2019. NetDIMM: Low-Latency NearMemory Network Interface Architecture. Int’l Symp. on Microarchitecture (MICRO) (2019)  
+2) Stanko Novakovic, Alexandros Daglis, Edouard Bugnion, Babak Falsafi, and Boris Grot. 2014. Scale-out NUMA. Int’l Conf. on Architectural Support for Programming Languages and Operating Systems (ASPLOS) (2014)  
+3) Mark Sutherland, Siddharth Gupta, Babak Falsafi, Virendra Marathe, Dionisios Pnevmatikatos, and Alexandros Daglis. 2020. The NeBuLa RPC-Optimized Architecture. Int’l Symp. on Computer Architecture (ISCA) (2020)  
+4) Mina Tahmasbi Arashloo, Alexey Lavrov, Manya Ghobadi, Jennifer Rexford, David Walker, and David Wentzlaff. 2020. Enabling Programmable Transport Protocols in High-Speed NICs. USENIX Symp. on Networked Systems Design and Implementation (NSDI) (2020)  
+5) Haggai Eran, Lior Zeno, Maroun Tork, Gabi Malka, and Mark Silberstein. 2019. NICA: An Infrastructure for Inline Acceleration of Network Applications. USENIX Annual Technical Conf. (ATC) (July 2019)
+6) Daniel Firestone, Andrew Putnam, Sambhrama Mundkur, Derek Chiou, Alireza Dabagh, Mike Andrewartha, Hari Angepat, Vivek Bhanu, Adrian Caulfield, Eric Chung, Harish Kumar Chandrappa, Somesh Chaturmohta, Matt Humphrey, Jack Lavier, Norman Lam, Fengfen Liu, Kalin Ovtcharov, Jitu Padhye, Gautham Popuri, Shachar Raindel, Tejas Sapre, Mark Shaw, Gabriel Silva, Madhan Sivakumar, Nisheeth Srivastava, Anshuman Verma, Qasim Zuhair, Deepak Bansal, Doug Burger, Kushagra Vaid, David A. Maltz, and Albert Greenberg. 2018. Azure Accelerated Networking: SmartNICs in the Public Cloud. In Proceedings of the 15th USENIX Conference on Networked Systems Design and Implementation (Renton, WA, USA) (NSDI’18). USENIX Association, USA, 51–64
+7) Phitchaya Mangpo Phothilimthana, Ming Liu, Antoine Kaufmann, Simon Peter, Rastislav Bodik, and Thomas Anderson. 2018. Floem: A Programming System for NIC-Accelerated Network Applications. Symposium on Operating Systems Design and Implementation (OSDI) (2018)
 <br><br>
 
 Thanks!!
