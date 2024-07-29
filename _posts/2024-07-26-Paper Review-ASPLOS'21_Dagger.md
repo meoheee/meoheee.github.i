@@ -6,7 +6,7 @@ tags:
   - Network
   - FPGA
 ---
-# Dagger: Efficient and Fast RPCs in Cloud Microservices withNear-Memory Reconfigurable NICs
+# Dagger: Efficient and Fast RPCs in Cloud Microservices with Near-Memory Reconfigurable NICs
 <br>
 >Due to copyright issues, I do not include `Figures` that are embedded in the paper :(
 {: .prompt-warning }  
@@ -125,7 +125,7 @@ CPU-NIC의 인터페이스 ->RPC 모듈 -> Transport Layer 입니다. `Figure 6`
 - Dagger IDL : Python 3.7
 
 <br><br>
-#### Evaluation 파트는 생략입니다!
+### Evaluation 파트는 생략할게요!
 
 그냥 다른 관련 연구들과의 비교일 뿐입니다. RPC 처리에 대해 더 빠르고 효율적이며 PCIe를 썼을 때보다 더 빠르다는 내용입니다. 딱 하나 봐야 할 내용이 있다면, 스레드 확장 시 7개까지 선형으로 좋아지지만 8개부터는 아니다라는 겁니다.
 <br>
@@ -143,17 +143,6 @@ NIC을 통째로 재구현했다는 점에 저는 좀 놀랐어요..! 하드웨�
 
 하지만 그럼에도 RPC 연산에서 만큼은 PCIe 말고 메모리-인터커넥트를 사용해야한다! 라고 다시 알게 해준 아주 중요한 부분을 찝어 논문에서 설명하고 있습니다.  
 <br><br>
-## Strength & Weakness
----
-
-### Strength
-
-1) PCIe보다 NUMA가 더 효율적임을 강하게 주장을 잘 드러냈습니다.
-
-
-### Weakness
-
-1) 어느 논문이나 단점이 있듯, 작은 RPC 요청에 초점을 맞추다보니 반대로 큰 RPC 요청에 대해서는 캐시 라인 크기의 제한으로 인해 소프트웨어 상에서 재조립을 해줘야한다는 겁니다.  
 
 
 
@@ -161,11 +150,13 @@ NIC을 통째로 재구현했다는 점에 저는 좀 놀랐어요..! 하드웨�
 
 1) Mohammad Alian and Nam Sung Kim. 2019. NetDIMM: Low-Latency NearMemory Network Interface Architecture. Int’l Symp. on Microarchitecture (MICRO) (2019)  
 2) Stanko Novakovic, Alexandros Daglis, Edouard Bugnion, Babak Falsafi, and Boris Grot. 2014. Scale-out NUMA. Int’l Conf. on Architectural Support for Programming Languages and Operating Systems (ASPLOS) (2014)  
-3) Mark Sutherland, Siddharth Gupta, Babak Falsafi, Virendra Marathe, Dionisios Pnevmatikatos, and Alexandros Daglis. 2020. The NeBuLa RPC-Optimized Architecture. Int’l Symp. on Computer Architecture (ISCA) (2020)  
+3) Mark Sutherland, Siddharth Gupta, Babak Falsafi, Virendra Marathe, Dionisios Pnevmatikatos, and Alexandros Daglis. 2020. The NeBuLa RPC-Optimized Architecture. Int’l Symp. on Computer Architecture (ISCA) (2020)    
 4) Mina Tahmasbi Arashloo, Alexey Lavrov, Manya Ghobadi, Jennifer Rexford, David Walker, and David Wentzlaff. 2020. Enabling Programmable Transport Protocols in High-Speed NICs. USENIX Symp. on Networked Systems Design and Implementation (NSDI) (2020)  
-5) Haggai Eran, Lior Zeno, Maroun Tork, Gabi Malka, and Mark Silberstein. 2019. NICA: An Infrastructure for Inline Acceleration of Network Applications. USENIX Annual Technical Conf. (ATC) (July 2019)
-6) Daniel Firestone, Andrew Putnam, Sambhrama Mundkur, Derek Chiou, Alireza Dabagh, Mike Andrewartha, Hari Angepat, Vivek Bhanu, Adrian Caulfield, Eric Chung, Harish Kumar Chandrappa, Somesh Chaturmohta, Matt Humphrey, Jack Lavier, Norman Lam, Fengfen Liu, Kalin Ovtcharov, Jitu Padhye, Gautham Popuri, Shachar Raindel, Tejas Sapre, Mark Shaw, Gabriel Silva, Madhan Sivakumar, Nisheeth Srivastava, Anshuman Verma, Qasim Zuhair, Deepak Bansal, Doug Burger, Kushagra Vaid, David A. Maltz, and Albert Greenberg. 2018. Azure Accelerated Networking: SmartNICs in the Public Cloud. In Proceedings of the 15th USENIX Conference on Networked Systems Design and Implementation (Renton, WA, USA) (NSDI’18). USENIX Association, USA, 51–64
-7) Phitchaya Mangpo Phothilimthana, Ming Liu, Antoine Kaufmann, Simon Peter, Rastislav Bodik, and Thomas Anderson. 2018. Floem: A Programming System for NIC-Accelerated Network Applications. Symposium on Operating Systems Design and Implementation (OSDI) (2018)
+5) Haggai Eran, Lior Zeno, Maroun Tork, Gabi Malka, and Mark Silberstein. 2019. NICA: An Infrastructure for Inline Acceleration of Network Applications. USENIX Annual Technical Conf. (ATC) (July 2019)  
+6) Daniel Firestone, Andrew Putnam, Sambhrama Mundkur, Derek Chiou, Alireza Dabagh, Mike Andrewartha, Hari Angepat, Vivek Bhanu, Adrian Caulfield, Eric Chung, Harish Kumar Chandrappa, Somesh Chaturmohta, Matt Humphrey, Jack Lavier, Norman Lam, Fengfen Liu, Kalin Ovtcharov, Jitu Padhye, Gautham Popuri, Shachar Raindel, Tejas Sapre, Mark Shaw, Gabriel Silva, Madhan Sivakumar, Nisheeth Srivastava, Anshuman Verma, Qasim Zuhair, Deepak Bansal, Doug Burger, Kushagra Vaid, David A. Maltz, and Albert Greenberg. 2018. Azure Accelerated Networking: SmartNICs in the Public Cloud. In Proceedings of the 15th USENIX Conference on Networked Systems Design and Implementation (Renton, WA, USA) (NSDI’18). USENIX Association, USA, 51–64  
+7) Phitchaya Mangpo Phothilimthana, Ming Liu, Antoine Kaufmann, Simon Peter, Rastislav Bodik, and Thomas Anderson. 2018. Floem: A Programming System for NIC-Accelerated Network Applications. Symposium on Operating Systems Design and Implementation (OSDI) (2018)  
+8) Aleksandar Dragojević, Dushyanth Narayanan, Miguel Castro, and Orion Hodson. 2014. FaRM: Fast Remote Memory. USENIX Symp. on Networked Systems Design and Implementation (NSDI) (2014).  
+9) Anuj Kalia, Michael Kaminsky, and David G. Andersen. 2016. Design Guidelines for High Performance RDMA Systems. USENIX Annual Technical Conf. (ATC) (2016).
 <br><br>
 
 Thanks!!
