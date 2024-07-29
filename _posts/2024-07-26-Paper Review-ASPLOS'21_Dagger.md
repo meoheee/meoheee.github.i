@@ -5,6 +5,7 @@ categories:
 tags:
   - Network
   - FPGA
+  - Interface
 ---
 # Dagger: Efficient and Fast RPCs in Cloud Microservices with Near-Memory Reconfigurable NICs
 <br>

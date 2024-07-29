@@ -5,6 +5,7 @@ categories:
 tags:
   - Network
   - FPGA
+  - Hardware-Accelerator
 ---
 # A RISC-V in-network accelerator for flexible high-performance low-power packet processing
 <br>
