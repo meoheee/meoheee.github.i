@@ -1,5 +1,5 @@
 ---
-title: "[Paper Review] USENIX'20 sRDMA"
+title: "[Paper Review] ATC'20 sRDMA"
 categories:
   - Paper
 tags:
