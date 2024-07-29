@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/2024-07-27-Paper Review-ATC'23_STYX.md",
+                "file": "_posts/2024-07-28-Paper Review-ATC'20_sRDMA.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/2024-07-27-Paper Review-ATC'23_STYX.md",
+                "file": "_posts/2024-07-28-Paper Review-ATC'20_sRDMA.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/2024-07-27-Paper Review-ATC'23_STYX.md",
+                "file": "_posts/2024-07-28-Paper Review-ATC'20_sRDMA.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/2024-07-27-Paper Review-ATC'23_STYX.md"
+                "file": "_posts/2024-07-28-Paper Review-ATC'20_sRDMA.md"
               }
             }
           }
@@ -148,11 +148,11 @@
   },
   "active": "d1d310946a63c4f9",
   "lastOpenFiles": [
-    "_posts/2024-07-28-Paper Review-ATC'20_sRDMA.md",
-    "_posts/2024-07-27-Paper Review-ATC'23_STYX.md",
-    "_posts/2024-07-25-Getting-Ready-to-Review-Papers.md",
     "_posts/2024-07-29-Paper Review-ISCA'21_PsPIN.md",
+    "_posts/2024-07-25-Getting-Ready-to-Review-Papers.md",
     "_posts/2024-07-26-Paper Review-ASPLOS'21_Dagger.md",
+    "_posts/2024-07-27-Paper Review-ATC'23_STYX.md",
+    "_posts/2024-07-28-Paper Review-ATC'20_sRDMA.md",
     "_tabs/about.md",
     "_tabs/archives.md",
     "_tabs/about Daehee.md",

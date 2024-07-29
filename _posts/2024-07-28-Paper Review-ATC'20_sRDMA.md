@@ -4,7 +4,8 @@ categories:
   - Paper
 tags:
   - Network
-  - FPGA
+  - Hardware-Security
+  - Cloud-Computing
 ---
 # sRDMA – Efficient NIC-based Authentication and Encryption for Remote Direct Memory Access
 <br>

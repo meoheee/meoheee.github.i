@@ -1,5 +1,5 @@
 ---
-title: "[Paper Review] USENIX'20 sRDMA"
+title: "[Paper Review] ISCA'21 PsPIN"
 categories:
   - Paper
 tags:

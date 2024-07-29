@@ -5,6 +5,7 @@ categories:
 tags:
   - Network
   - Cloud-Computing
+  - OS
 ---
 # Styx: Exploiting SmartNIC Capability to Reduce Datacenter Memory Tax
 <br>
