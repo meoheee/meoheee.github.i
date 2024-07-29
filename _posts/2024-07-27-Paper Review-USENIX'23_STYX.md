@@ -39,7 +39,7 @@ tags:
 
 ### Backgrounds
 
-위에서 말한 `ksm`과 `zswap`이 뭔지 먼저 알아보고 가도록 하죠!
+위에서 말한 `ksm`과 `zswap`이 뭔지 먼저 알아보고 가도록 하죠!  
 
 <br><br>
 
