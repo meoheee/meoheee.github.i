@@ -95,19 +95,27 @@ $$ mac_{hdr} = MAC_{K_{A,B}}(nonce_{A->B}||RH||BTH)$$
 그래서 AEAD(Authenticated Encryption with Associated Data)를 사용해 Payload의 비밀성과 무결성을 확보하고, 인증 태그를 STH의 MAC 필드로 전송합니다.  
 
 ##### PD-Level Protection
-
+저자는 QP-Level keys 라는 것을 소개하는데요. 이건 QP 당 16바이트짜리 키이죠. 근데 RNIC에 QP가 많으면 당연히 또 오버헤드가 많아질거에요. 그래서 메모리 오버헤드를 줄이고 QP 마다 키를 저장하는 일이 없도록 PD-Level 프로텍션을 도입합니다.
+$$K_{A,B}=PRF_{K_{PD}}(APA_A||QPN_A||APA_A||QPN_B)$$
+PRF는 PD-level 키 $K_{PD}$와 고유한 엔드 포인트 식별자 쌍(APA = Adapter Port Address)을 input으로 하는 pseudo random 함수 입니다. RDMA 요청이 PD 내의 QP를 대상으로 할 때 RNIC이 $K_{PD}$를 이용해 QP 레벨 키를 만들고 암호화합니다. 그러면 QP마다 대칭키를 저장하는게 아니라 PD마다 키를 저장하는 것이겠죠.  
 
 ##### Extended Memory Protection
-
-
+더 강력하게! 접근 제어 매커니즘을 사용합니다! 또 $K_{PD}$를 이용하고요  
+$$ K_{MR} = PRF_{K_{PD}}(START_{MR}||END_{MR}||r\_key_{MR})$$
+$K_{MR}$ 로 메모리 무단 접근을 막을 수 있습니다. 원격에서 MR영역 아래 SR에 접근하려면 $K_{MR}$을 소유하고 있음을 증명하고 SR에 대한 키를 계산해야 합니다.  
+$$ K_{SR} = PRF_{K_{MR}}(START_{SR}||END_{SR})$$
+Replay Attack을 막기 위해 메모리 영역마다 Nonce를 사용해야 하는데 여러 QP가 동일한 메모리 영역에 접근할 수 있으니 RNIC이 각 패킷마다 고유한 논스를 포함하도록 합니다. 그런데 여러 개가 동시에 오면 Nonce가 겹칠 수도 있겠죠. 그래서 패킷 헤더의 MAC을 아래처럼 재사용합니다.
+$$mac_{hdr}=MAC_{K_{A,B}}(K_{SR}||mac_{hdr})$$
 
 ##### Sub-Delegation of Access to Memory
-
-
+이 부분은 사실 저도 잘 이해가 안됨다ㅠㅠ  
+뭐 아무튼 `Figure 1`처럼 하위 영역으로 메모리 접근을 위임한다고 하는데요.
+$$K_{MR_{child}} = PRF_{K_{MR_{parent}}}(START_{MR_{parent}}||END_{MR_{parent}})$$
+어렵네요...
 
 #### Implementation
 
-sRDMA는 C++로 구현되었고, libibverbs, librdmacm, Openssl 1.1.1a, libev 등의 라이브러리를 사용했다고 합니다. 그리고 SmartNIC을 사용했고, RoCEv2로 RDMA를 지원하며 암호화 가속이 가능하다고 합니다. 즉, sRDMA는 SmartNIC을 통해 양방향으로 전송될 수 있습니다. `Figure 4`에 ㅁ그 구조가 나와있는데, Initiator, SmartNIC, Target으로 구성되네요.
+sRDMA는 C++로 구현되었고, libibverbs, librdmacm, Openssl 1.1.1a, libev 등의 라이브러리를 사용했다고 합니다. 그리고 SmartNIC을 사용했고, RoCEv2로 RDMA를 지원하며 암호화 가속이 가능하다고 합니다. 즉, sRDMA는 SmartNIC을 통해 양방향으로 전송될 수 있습니다. `Figure 4`에 그 구조가 나와있는데, Initiator, SmartNIC, Target으로 구성되네요.
 
 
 <br><br>
